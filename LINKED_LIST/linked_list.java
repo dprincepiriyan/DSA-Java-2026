@@ -7,6 +7,29 @@ public class linked_list {
             this.next=null;
         }
     }
+    static Node insertAtFront(Node head,int x){
+        Node newNode=new Node(x);
+        newNode.next=head;
+        return newNode;
+    }
+    public static Node insertAfter(Node head,int key,int newData){
+        Node curr=head;
+        while(curr!=null){
+            if(curr.data==key){
+                break;
+            }
+            curr=curr.next;
+        }
+        if(curr==null){
+            System.out.println("Key not found");
+            return head;
+        }
+        Node newNode=new Node(newData);
+        newNode.next=curr.next;
+        curr.next=newNode;
+        return head;
+    }
+
     public static int FindLowest(Node head){
         int min=head.data;
         Node curr=head;
@@ -35,6 +58,15 @@ public class linked_list {
         }
         return head;
     }
+    static void printList(Node head){
+        Node curr=head;
+        while(curr!=null){
+            System.out.print(curr.data+" -> ");
+            curr=curr.next;
+        }
+        System.out.print("null");
+        System.out.println();
+    }
     public static void main(String[] args) {
         Node firstNode=new Node(10);
         Node secondNode=new Node(20);
@@ -43,20 +75,14 @@ public class linked_list {
         firstNode.next=secondNode;
         secondNode.next=thirdNode;
         thirdNode.next=forthNode;
-        Node currNode=firstNode;
-        while(currNode!=null){
-            System.out.print(currNode.data+" -> ");
-            currNode=currNode.next;
-        }
+        printList(firstNode);
         System.out.println("Lowest value in the list: " + FindLowest(firstNode));
-        System.out.print("null");
-        System.out.println();
         firstNode=deleteSpecificNode(firstNode,thirdNode);
-        currNode=firstNode;
-        while(currNode!=null){
-            System.out.print(currNode.data+" -> ");
-            currNode=currNode.next;
-        }
-        System.out.print("null");
+        int w=100;
+        firstNode=insertAtFront(firstNode,w);
+        printList(firstNode);
+        firstNode=insertAfter(firstNode,20,25);
+        printList(firstNode);
+        
     }
 }
