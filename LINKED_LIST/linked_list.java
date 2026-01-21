@@ -67,6 +67,40 @@ public class linked_list {
         System.out.print("null");
         System.out.println();
     }
+    //random questions on linked list
+    //remove every k-th node from linked list
+    public static Node deleteK(Node head,int k){
+        if(head==null || k<=0){
+            return head;
+        }
+        Node curr=head;
+        Node prev=null;
+        int count=0;
+        while(curr!=null){
+            count++;
+            if(count%k==0){
+                if(prev!=null){
+                    prev.next=curr.next;
+                }else{
+                    head=curr.next;
+                }
+            }else{
+                prev=curr;
+            }
+            curr=curr.next;
+        }
+        return head;
+    }
+    //find the middle of linked list
+    public static int getMiddle(Node head){
+        Node slow=head;
+        Node fast=head;
+        while(fast!=null && fast.next!=null){
+            slow=slow.next;
+            fast=fast.next.next;
+        }
+        return slow.data;
+    }
     public static void main(String[] args) {
         Node firstNode=new Node(10);
         Node secondNode=new Node(20);
